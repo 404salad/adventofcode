@@ -1,6 +1,5 @@
 use util::get_lines;
 fn getsum(word: &str) -> u32 {
-    println!("got input {}", word);
     if word.is_empty() {return 0};
     let mut i = 0;
     let mut j = word.len()-1;
@@ -18,10 +17,13 @@ fn getsum(word: &str) -> u32 {
     ret.parse::<u32>().unwrap()
     
 }
+
 fn main() {
     get_lines(|lines| {
+        let mut sum = 0;
         for word in lines {
-            println!("{} {}", word, getsum(word));
+            sum+=getsum(word);
         }
-    })
+        println!("{sum}");
+    });
 }
