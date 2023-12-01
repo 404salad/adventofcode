@@ -1,4 +1,19 @@
 use util::get_lines;
+
+fn replace_digits(input: &str) -> String {
+    let replaced = input
+        .replace("one", "o1e")
+        .replace("two", "t2o")
+        .replace("three", "t3e")
+        .replace("four", "4")
+        .replace("five", "5e")
+        .replace("six", "6")
+        .replace("seven", "7")
+        .replace("eight", "e8t")
+        .replace("nine", "9");
+
+    replaced
+}
 fn getsum(word: &str) -> u32 {
     if word.is_empty() {return 0};
     let mut i = 0;
@@ -22,7 +37,7 @@ fn main() {
     get_lines(|lines| {
         let mut sum = 0;
         for word in lines {
-            sum+=getsum(word);
+            sum+=getsum(&replace_digits(word));
         }
         println!("{sum}");
     });
