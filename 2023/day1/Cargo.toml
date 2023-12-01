@@ -7,3 +7,6 @@ edition = "2021"
 
 [dependencies]
 util = { path = "../util" }
+
+[profile.dev]
+debug = true
