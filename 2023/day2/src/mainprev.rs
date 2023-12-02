@@ -21,28 +21,25 @@ fn parse_color_string(color_string: &str) -> Vec<(usize,String)> {
         })
     .collect()
 }
-fn calc(game:Vec<String>) -> usize {
-    let mut max =[0;3];
+fn calc(game:Vec<String>) -> bool {
+    let max = [-1;3];
     for turn in game {
         for (count,color) in &parse_color_string(&turn){
-            match color.as_str() {
-                "red" => {
-                    if max[0] < *count {max[0] = *count;}
-                },
-                "blue" => {
-                    if max[1] < *count {max[1] = *count;}
-                },
-                "green" => {
-                    if max[2] < *count {max[2] = *count;}
-                },
-                _=> {
-                }
+            
+            if color=="red" && count > &(12 as usize){
+                return false;
+            }
+            else if color=="green" && count > &(13 as usize){
+                return false;
+            }
+            else if color=="blue" && count > &(14 as usize){
+                return false;
             }
 
         };
              
     }
-    max.iter().fold(1,|acc,&x| acc*x)
+    true
 }
 fn main() {
     let fpath = get_file_name();
@@ -52,7 +49,9 @@ fn main() {
     let parsed: Entry = serde_json::from_str(&data).expect("Failed to parse json");
     let mut sum = 0;
     for a in parsed.rows{
-        sum+=calc(a.1);
+        if calc(a.1) {
+            sum+=(a.0).parse::<u32>().unwrap();
+        }
     }
     println!("{sum}");
 }
