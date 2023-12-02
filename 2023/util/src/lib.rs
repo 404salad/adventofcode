@@ -1,7 +1,7 @@
 use std::env;
 use std::fs;
 
-fn get_file_name() -> &'static str {
+pub fn get_file_name() -> &'static str {
     if env::var("DEMO").unwrap_or("0".to_string()) == "1" {
         "demo-input.txt"
     } else {
